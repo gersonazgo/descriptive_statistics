@@ -1,7 +1,7 @@
 module DescriptiveStatistics
   def mode(collection = self, &block)
     values = Support::extract(collection, &block)
-    return if values.to_a.empty?
+    return "-" if values.to_a.empty?
 
     mode_count = values
       .group_by { |e| e }
@@ -9,7 +9,7 @@ module DescriptiveStatistics
       .max_by(&:size)
       .count
 
-    return if mode_count == 1
+    return "-" if mode_count == 1
 
     modes = 0 
 
@@ -19,7 +19,7 @@ module DescriptiveStatistics
         end 
     end
 
-    return if modes >=2
+    return "-" if modes >=2
 
     return values.group_by { |e| e }.values.max_by(&:size).first
 
