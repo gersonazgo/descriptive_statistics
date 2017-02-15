@@ -9,7 +9,12 @@ module DescriptiveStatistics
       .max_by(&:size)
       .count
 
-    return "-" if mode_count == 1
+    different_values = values
+      .group_by { |e| e }
+      .values
+      .count
+      
+    return "-" if mode_count == 1 and different_values != 1
 
     modes = 0 
 
